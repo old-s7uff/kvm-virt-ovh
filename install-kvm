@@ -1,9 +1,17 @@
 #!/bin/bash
+# PRE
+          apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y
+          apt-get autoremove -y
+          apt-get -f install -y
+          apt-get install ruby -y
+          gem install lolcat
+          clear
+# END PRE.
 # ==============================================
 # CHECKS.
 # ==============================================
 checks() {
-          echo "=========================================================="
+          echo "==========================================================" | lolcat -a -s 100;
           if [ "$(whoami)" != "root" ]
           then
               echo "You should Login as root to use this script!";
@@ -12,9 +20,9 @@ checks() {
               echo "Then re'execute the script again!"
               exit 1
           else
-              echo "ROOT Checked : OK"
+              echo "ROOT Checked : OK" | lolcat -a -s 100;
           fi
-          echo "=========================================================="
+          echo "==========================================================" | lolcat -a -s 100;
           if [ "$(cat /etc/issue.net)" != "Ubuntu 14.04.5 LTS" ]
           then
               echo "This OS Doesn't seems to be Ubuntu 14.04!";
@@ -22,17 +30,21 @@ checks() {
               echo "If so, please open script and change cat /etc/issue.net to cat /etc/issue";
               exit 1
           else
-              echo "OS Checked   : OK"
+              echo "OS Checked   : OK" | lolcat -a -s 100;
           fi
-          echo "=========================================================="
+          echo "==========================================================" | lolcat -a -s 100;
           if [ "$(uname -i)" != "x86_64" ]
           then
               echo "This Server Doesn't seems to be 64 BIT !";
               exit 1
           else
-              echo "ARCH Checked   : OK"
+              echo "ARCH Checked   : OK" | lolcat -a -s 100;
           fi
-          echo "=========================================================="
+          echo "==========================================================" | lolcat -a -s 100;
+          echo "Installation is about to start we will wait 20sec if you change your mind"
+          echo "PLEASE HIT CTLR+C TO CANCEL IF WE START YOU WON'T BE ABLE TO STOP IT" | lolcat -a -s 100;
+          echo "IF YOU STOP IT AFTER THIS YOU WILL NEED TO REINSTALL THIS MACHINE!" | lolcat -a -s 100;
+          sleep 20;
 }
 # ==============================================
 # END CHECKS.
@@ -55,7 +67,8 @@ packs(){
           apt-get install aptitude -y
           apt-get install g++ flex bison curl doxygen libyajl-dev libgeoip-dev libtool dh-autoreconf libcurl4-gnutls-dev libxml2 libpcre++-dev libxml2-dev -y
           apt-get install -y kpartx gcc openssl unzip make e2fsprogs gperf genisoimage flex bison pkg-config libpcre3-dev libreadline-dev libxml2-dev ocaml libselinux1-dev libsepol1-dev libfuse-dev libyajl-dev
-          
+          apt-get install grub2 -y
+          update-grub
 }
 # ==============================================
 # END PACKS.
@@ -66,7 +79,7 @@ packs(){
 # ==============================================
 if [ "$1" == 'install' ]; then
    clear
-   checks packs;
+   checks; packs;
 fi
 # ==============================================
 # END CLI.
