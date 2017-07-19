@@ -463,8 +463,6 @@ if(!empty($args['master'])){
 			}
 		}
 	}
-	// Install Comman Packages Needed for all Virt
-	install_common_packages();
 }
 // Exit with a status of 8 - It was successful
 exit(8);
