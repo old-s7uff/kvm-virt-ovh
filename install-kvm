@@ -2,3 +2,4 @@
 # Installation Script For virtualizor on Ubuntu 14.04 (KVM)
 
 apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y; apt-get autoremove -y
+apt-get install build-essential libssl-dev sudo curl nano wget zip unzip git -y
