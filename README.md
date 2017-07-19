@@ -14,16 +14,14 @@ How to use/install?
 
 4 . `./install-kvm`
 
-you will be asked to wrote mysql password. wrote whatever you want isn't problem. 
-
 Then at the end you will be able to read "installation has end" means virtualizor is installed. 
+if you reboot your server and virtualizor is down, just start it like (`/etc/init.d/virtualizor start`)
 
 
 To do. 
 
- 1 . Script was created in fast way means there can be some errors. but it work!
+ 1 . Creating a better script. Script was created in fast way means there can be some errors. but it work!
  
- 2 . if you reboot your server and virtualizor is down, just start it like (`/etc/init.d/virtualizor start`)
 
 
 **CREATED FOR UBUNTU 14.04 (KVM)** Don't blame if you read any kind of error in installation or after installation! it's beta.
