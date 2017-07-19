@@ -1,4 +1,5 @@
 # kvm-virt-ovh
+![](http://i.imgur.com/xApRr8o.png)
 
 why? - got some problems with network on ovh. so this will not install virtualizor fully as it is. but here are removed
 someparts of official installation script.(with "parts" i mean all those parts of script which install or do anything with network are removed!")
