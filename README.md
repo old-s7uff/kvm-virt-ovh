@@ -1,7 +1,7 @@
 # kvm-virt-ovh
 
-why? - got some problems with network on ovh. so this will not install virtualizor fully as it is. but there are removed
-someparts which virtualizor install anything which will touch network! 
+why? - got some problems with network on ovh. so this will not install virtualizor fully as it is. but here are removed
+someparts of official installation script.(with "parts" i mean all those parts of script which install or do anything with network are removed!")
 
 How to use/install?
 
@@ -23,3 +23,6 @@ To do.
  1 . Script was created in fast way means there can be some errors. but it work!
  
  2 . if you reboot your server and virtualizor is down, just start it like (`/etc/init.d/virtualizor start`)
+
+
+**CREATED FOR UBUNTU 14.04 (KVM)** Don't blame if you read any kind of error in installation or after installation! it's beta.
