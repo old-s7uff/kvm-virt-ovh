@@ -19,7 +19,7 @@ Then at the end you will be able to read "installation has end" means virtualizo
 if you reboot your server and virtualizor is down, just start it like (`/etc/init.d/virtualizor start`)
 
 
-**To do. **
+**To do.**
 
  1 . Creating a better script. Script was created in fast way means there can be some errors. but it work!
  
