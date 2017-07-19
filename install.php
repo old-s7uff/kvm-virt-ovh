@@ -431,6 +431,21 @@ oslist(1);
 
 
 //===========================
+// 6) SSL Certificates
+//===========================
+echo "		- Generating the SSL Certificates\n";
+$hostname = shell_exec('hostname');
+$hostname = trim($hostname);
+shell_exec('/usr/local/emps/bin/openssl genrsa -out /usr/local/virtualizor/conf/virtualizor.key 1024 >> '.$args['log'].' 2>&1');
+
+shell_exec('/usr/local/emps/bin/openssl req -subj /C=US/ST=Berkshire/L=Newbury/O=\'My Company\'/CN=\''.$hostname.'\'/emailAddress='.$args['email'].' -new -key /usr/local/virtualizor/conf/virtualizor.key -out /usr/local/virtualizor/conf/virtualizor.csr >> '.$args['log'].'');
+
+shell_exec('/usr/local/emps/bin/openssl x509 -req -days 365 -in /usr/local/virtualizor/conf/virtualizor.csr -signkey /usr/local/virtualizor/conf/virtualizor.key -out /usr/local/virtualizor/conf/virtualizor.crt >> '.$args['log'].' 2>&1');
+
+// Make a Fake file for the moment
+shell_exec('echo "" >> /usr/local/virtualizor/conf/virtualizor-bundle.crt');
+
+//===========================
 // 8) Installing the KERNEL
 //===========================
 echo "4) Installing the Virtualization Kernel - ".(!empty($args['master']) ? 'Master' : $args['kernel'])."\n";
