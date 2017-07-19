@@ -1,15 +1,17 @@
 #!/bin/bash
+setenforce 0 >> /dev/null 2>&1
+
+FILEREPO=http://files.virtualizor.com
+LOG=/root/virtualizor.log
 # ==============================================
 # PRE.
 # ==============================================
-pre() {
           apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y
           apt-get autoremove -y
           apt-get -f install -y
           apt-get install ruby -y
           gem install lolcat
           clear
-}
 # ==============================================
 # END PRE.
 # ==============================================
@@ -17,7 +19,6 @@ pre() {
 # ==============================================
 # CHECKS.
 # ==============================================
-checks() {
           echo "==========================================================" | lolcat -a -s 100;
           if [ "$(whoami)" != "root" ]
           then
@@ -27,7 +28,7 @@ checks() {
               echo "Then re'execute the script again!"
               exit 1
           else
-              echo "~ ROOT Checked   : OK" | lolcat -a -s 100;
+              echo "~ ROOT Checked    : OK" | lolcat -a -s 100;
           fi
           echo "==========================================================" | lolcat -a -s 100;
           if [ "$(cat /etc/issue.net)" != "Ubuntu 14.04.5 LTS" ]
@@ -37,7 +38,7 @@ checks() {
               echo "If so, please open script and change cat /etc/issue.net to cat /etc/issue";
               exit 1
           else
-              echo "~ OS Checked     : OK" | lolcat -a -s 100;
+              echo "~ OS Checked      : OK" | lolcat -a -s 100;
           fi
           echo "==========================================================" | lolcat -a -s 100;
           if [ "$(uname -i)" != "x86_64" ]
@@ -45,7 +46,7 @@ checks() {
               echo "This Server Doesn't seems to be 64 BIT !";
               exit 1
           else
-              echo "~ ARCH Checked   : OK" | lolcat -a -s 100;
+              echo "~ ARCH Checked    : OK" | lolcat -a -s 100;
           fi
           echo "==========================================================" | lolcat -a -s 100;
           if [ -d "/usr/local/emps/" ]; then
@@ -53,7 +54,7 @@ checks() {
               echo "Maybe you have use this script before or you haven install virtualizor!"
               exit 1
           else
-              echo "~ IDC Checked    : OK" | lolcat -a -s 100;
+              echo "~ IDC Checked     : OK" | lolcat -a -s 100;
           fi
           echo "==========================================================" | lolcat -a -s 100;
           if [ -d "/usr/local/virtualizor" ]; then
@@ -61,7 +62,7 @@ checks() {
               echo "Maybe you have use this script before or you haven install virtualizor!"
               exit 1
           else
-              echo "~ IDC2 Checked   : OK" | lolcat -a -s 100;
+              echo "~ IDC2 Checked    : OK" | lolcat -a -s 100;
           fi
           echo "==========================================================" | lolcat -a -s 100;
           if [ -d "/etc/mysql" ]; then
@@ -69,14 +70,21 @@ checks() {
               echo "Maybe you already have install mysql server!"
               exit 1
           else
-              echo "~ MYSQL Checked  : OK" | lolcat -a -s 100;
+              echo "~ MYSQL Checked   : OK" | lolcat -a -s 100;
+          fi
+          echo "==========================================================" | lolcat -a -s 100;
+          if [ -d "/usr/local/solusvm" ]; then
+              echo "We've detect a folder '/usr/local/solusvm' which means"
+              echo "Maybe you have install SolusVM!"
+              exit 1
+          else
+              echo "~ SOLUSVM Checked : OK" | lolcat -a -s 100;
           fi
           echo "==========================================================" | lolcat -a -s 100;
           echo "Installation is about to start we will wait 20sec if you change your mind"
           echo "PLEASE HIT CTLR+C TO CANCEL IF WE START YOU WON'T BE ABLE TO STOP IT" | lolcat -a -s 100;
           echo "IF YOU STOP IT AFTER THIS YOU WILL NEED TO REINSTALL THIS MACHINE!" | lolcat -a -s 100;
           sleep 30;
-}
 # ==============================================
 # END CHECKS.
 # ==============================================
@@ -84,7 +92,6 @@ checks() {
 # ==============================================
 # PACKS.
 # ==============================================
-packs(){
           apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y
           apt-get autoremove -y
           apt-get -f install -y
@@ -97,21 +104,59 @@ packs(){
           apt-get install -y libcairo2 libcairo2-dev
           apt-get install aptitude -y
           apt-get install g++ flex bison curl doxygen libyajl-dev libgeoip-dev libtool dh-autoreconf libcurl4-gnutls-dev libxml2 libpcre++-dev libxml2-dev -y
-          apt-get install -y kpartx gcc openssl unzip make e2fsprogs gperf genisoimage flex bison pkg-config libpcre3-dev libreadline-dev libxml2-dev ocaml libselinux1-dev libsepol1-dev libfuse-dev libyajl-dev
+          apt-get install -y kpartx gcc openssl unzip make e2fsprogs gperf genisoimage flex bison pkg-config libpcre3-dev libreadline-dev libxml2-dev ocaml libselinux1-dev libsepol1-dev libfuse-dev libyajl-dev lvm2
           apt-get install grub2 -y
           update-grub
-}
+          rm -Rf /tmp
+          mkdir /tmp; cd /tmp
+          wget http://mirror.softaculous.com/virtualizor/debian/pool/main/throttle_1.2-5_amd64.deb
+          wget http://download.proxmox.com/debian/dists/wheezy/pve-no-subscription/binary-amd64/libfuse-dev_2.9.2-4_amd64.deb
+          dpkg -i /tmp/throttle_1.2-5_amd64.deb
+          dpkg -i /tmp/libfuse-dev_2.9.2-4_amd64.deb
+          apt-get -f install -y
+          apt-get install mysql-server mysql-client -y
+          
+          apt-get -f install -y
+          apt-get autoremove -y
+          echo "==========================================================" | lolcat -a -s 100;
+          echo "~ PACKS INSTALLED : OK"
+          echo "==========================================================" | lolcat -a -s 100;
+          sleep 3;
+          clear
 # ==============================================
 # END PACKS.
 # ==============================================
 
 # ==============================================
+# DIRS.
+# ==============================================
+          mkdir /usr/local/emps
+          mkdir /usr/local/virtualizor
+          wget -N -O /usr/local/virtualizor/EMPS.tar.gz "http://files.softaculous.com/emps.php?arch=64"
+          tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps
+          rm -rf /usr/local/virtualizor/EMPS.tar.gz
+          cd /tmp; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
+          mv /tmp/install.php /usr/local/virtualizor/install.php
+# ==============================================
+# END DIRS.
+# ==============================================
+
+# ==============================================
+# INSTALL.
+# ==============================================
+          /usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php email=daraw665@gmail.com kernel=kvm
+          rm -rf /usr/local/virtualizor/install.php
+          rm -rf /usr/local/virtualizor/upgrade.php
+# ==============================================
+# END INSTALL.
+# ==============================================
+
+# ==============================================
 # CLI.
 # ==============================================
-if [ "$1" == 'install' ]; then
-   clear
-   pre; checks; packs;
-fi
+/etc/init.d/virtualizor start
+clear
+echo "Installaion has end!"
 # ==============================================
 # END CLI.
 # ==============================================
