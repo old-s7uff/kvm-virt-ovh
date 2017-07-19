@@ -9,7 +9,7 @@ How to use/install?
 
 2 . `chmod +x install-kvm`
 
-3 . `nano install-kvm *(edit this line wrote your email https://github.com/systemroot/kvm-virt-ovh/blob/master/install-kvm#L147)*`
+3 . `nano install-kvm` *(edit this line wrote your email https://github.com/systemroot/kvm-virt-ovh/blob/master/install-kvm#L147)*
 
 4 . `./install-kvm`
 
