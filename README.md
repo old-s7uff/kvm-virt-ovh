@@ -4,7 +4,7 @@
 why? - got some problems with network on ovh. so this will not install virtualizor fully as it is. but here are removed
 someparts of official installation script.(with "parts" i mean all those parts of script which install or do anything with network are removed!")
 
-How to use/install?
+**How to use/install?**
 
 1 . `wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install-kvm`
 
@@ -19,10 +19,13 @@ Then at the end you will be able to read "installation has end" means virtualizo
 if you reboot your server and virtualizor is down, just start it like (`/etc/init.d/virtualizor start`)
 
 
-To do. 
+**To do. **
 
  1 . Creating a better script. Script was created in fast way means there can be some errors. but it work!
  
 
+**INFO.**
 
-**CREATED FOR UBUNTU 14.04 (KVM)** Don't blame if you read any kind of error in installation or after installation! it's beta.
+1 . **CREATED FOR UBUNTU 14.04 (KVM)** Don't blame if you read any kind of error in installation or after installation! it's beta.
+
+2 . Don't add any other extra option like "interface=" or "lvg=" in installation script. you can add them in Virtualizor GUI.
