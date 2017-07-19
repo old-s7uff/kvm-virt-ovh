@@ -96,6 +96,7 @@ LOG=/root/virtualizor.log
           apt-get autoremove -y
           apt-get -f install -y
           apt-get install apt-utils build-essential -y
+          apt-get install mysql-server mysql-client -y
           apt-get install wget zip unzip curl sudo libssl-dev git -y
           apt-get install openssl libssl-dev libperl-dev libexpat-dev -y
           apt-get install dh-autoreconf -y
@@ -114,7 +115,6 @@ LOG=/root/virtualizor.log
           dpkg -i /tmp/throttle_1.2-5_amd64.deb
           dpkg -i /tmp/libfuse-dev_2.9.2-4_amd64.deb
           apt-get -f install -y
-          apt-get install mysql-server mysql-client -y
           
           apt-get -f install -y
           apt-get autoremove -y
