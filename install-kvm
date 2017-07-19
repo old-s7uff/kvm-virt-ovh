@@ -137,6 +137,7 @@ LOG=/root/virtualizor.log
           rm -rf /usr/local/virtualizor/EMPS.tar.gz
           cd /root/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
           mv /root/install.php /usr/local/virtualizor/install.php
+          cd ~
 # ==============================================
 # END DIRS.
 # ==============================================
@@ -144,6 +145,7 @@ LOG=/root/virtualizor.log
 # ==============================================
 # INSTALL.
 # ==============================================
+          cd ~
           rm -Rf /tmp
           mkdir /tmp
           chmod -R 7777 /tmp
@@ -153,9 +155,11 @@ LOG=/root/virtualizor.log
           #mysql -u root -p -e \ "CREATE DATABASE virtualizor;"
           #mysql -u root -p virtualizor < virtualizor.sql
           #cp /usr/local/virtualizor/_universal.php /usr/local/virtualizor/universal.php let install.php take care of it.
+          cd ~
           /usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php email=daraw665@gmail.com kernel=kvm
           rm -rf /usr/local/virtualizor/install.php
           rm -rf /usr/local/virtualizor/upgrade.php
+          cd ~
 # ==============================================
 # END INSTALL.
 # ==============================================
@@ -163,6 +167,7 @@ LOG=/root/virtualizor.log
 # ==============================================
 # CLI.
 # ==============================================
+cd ~
 /etc/init.d/virtualizor start
 clear
 echo "Installaion has end!"
