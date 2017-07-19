@@ -276,17 +276,29 @@ if(file_exists('/etc/redhat-release')){
 	$distro = $data['distro'] = 'ubuntu';
 }
 
+// Download the Package
+shell_exec('cd /root; wget -O latest.zip "http://www.virtualizor.com/updates.php?install=true&version=latest'.(!empty($args['beta']) ? '&beta=1' : '').'" >> '.$args['log'].' 2>&1');
 
+// Unzip the Package
+shell_exec('cd /root; unzip -o latest.zip -d /usr/local/virtualizor >> '.$args['log'].' 2>&1');
+
+// Remove the Package
+shell_exec('cd /root; /bin/rm -rf latest.zip >> '.$args['log'].' 2>&1');
 
 // Now copy the CONF files
 exec('ln -s /usr/local/virtualizor/conf/emps/nginx.conf /usr/local/emps/etc/nginx/nginx.conf >> '.$args['log'].' 2>&1');
 exec('ln -s /usr/local/virtualizor/conf/emps/php-fpm.conf /usr/local/emps/etc/php-fpm.conf >> '.$args['log'].' 2>&1');
 exec('ln -s /usr/local/virtualizor/conf/emps/php.ini /usr/local/emps/etc/php.ini >> '.$args['log'].' 2>&1');
+exec('ln -s /usr/local/virtualizor/conf/emps/my.cnf /usr/local/emps/etc/my.cnf >> '.$args['log'].' 2>&1');
 exec('ln -s /usr/local/virtualizor/conf/emps/emps /etc/init.d/virtualizor >> '.$args['log'].' 2>&1');
 
 // Put the Auto start
 @chmod('/usr/local/virtualizor/conf/emps/emps', 0755);
 @chmod('/etc/init.d/virtualizor', 0755);
+
+// Start MySQL 
+exec('/usr/local/emps/bin/mysqlctl start >> '.$args['log'].' 2>&1');
+
 // Default is OpenVZ
 if(empty($args['kernel'])){	
 	$args['kernel'] = 'openvz';
@@ -325,7 +337,7 @@ $second_day = $first_day + 15;
 echo "		- Configuring Virtualizor\n";
 
 $data['cookie_name'] = 'SIMCookies'.rand(1, 9999);
-$data['dbpass'] = 'ludaboy0x0';
+$data['dbpass'] = generateRandStr(10);
 $data['soft_email'] = $args['email'];
 $data['kernel'] = ($args['kernel'] == 'virtuozzo' ? 'vzk vzo' : $args['kernel']);
 $data['kernel'] = ($data['kernel'] == 'proxmox' ? ($prox_v == 4 ? 'proxk proxl' : 'proxk proxo') : $data['kernel']);
@@ -383,7 +395,7 @@ add_cron($globals['cron_time']);
 //===========================
 echo "		- Importing Database\n";
 
-$globals['conn'] = @mysql_connect($globals['dbhost'], $globals['dbuser'], $globals['dbpass'], true);
+$globals['conn'] = @mysql_connect($globals['dbhost'], $globals['dbuser'], '', true);
 @mysql_select_db('mysql', $globals['conn']) or die( "Unable to select database 1");
 
 // Update the ROOT Password
@@ -397,7 +409,7 @@ makequery("DROP DATABASE IF EXISTS `".$globals['db']."`");
 // Create the Database
 makequery("CREATE DATABASE `".$globals['db']."`");
 
-shell_exec('service mysql restart');
+shell_exec('/usr/local/emps/bin/mysqlctl restart');
 
 // Import the Database
 shell_exec('/usr/local/emps/bin/mysql -h localhost -u root -p'.$globals['dbpass'].' '.$globals['db'].' < '.$globals['path'].'/virtualizor.sql');
