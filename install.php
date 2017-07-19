@@ -182,8 +182,6 @@ function _package_install($package, $log){
 			shell_exec('apt-get -y install '.$v.' >> '.$log.' 2>&1');
 		}
 	}
-	}
-
 }
 // chkconfig script.
 // If priority given, will be applied on UBUNTU only.
