@@ -10,11 +10,12 @@ How to use/install?
 
 2 . `chmod +x install-kvm`
 
-3 . `nano install-kvm` *(edit this line wrote your email https://github.com/systemroot/kvm-virt-ovh/blob/master/install-kvm#L147)*
+3 . `nano install-kvm` *(edit this line wrote your email https://github.com/systemroot/kvm-virt-ovh/blob/master/install-kvm#L159)*
 
 4 . `./install-kvm`
 
 Then at the end you will be able to read "installation has end" means virtualizor is installed. 
+
 if you reboot your server and virtualizor is down, just start it like (`/etc/init.d/virtualizor start`)
 
 
