@@ -1,11 +1,6 @@
 #!/bin/bash
 clear
-
 setenforce 0 >> /dev/null 2>&1
-
-# Flush the IP Tables
-#iptables -F >> /dev/null 2>&1
-#iptables -P INPUT ACCEPT >> /dev/null 2>&1
 
 FILEREPO=http://files.virtualizor.com
 LOG=/root/virtualizor.log
@@ -28,14 +23,13 @@ echo " "
 #----------------------------------
 # Some checks before we proceed
 #----------------------------------
-
 # Gets Distro type.
 if [ -d /etc/pve ]; then
 	OS=Proxmox
 	REL=$(/usr/bin/pveversion)
 elif [ -f /etc/debian_version ]; then
 	OS=Ubuntu
-	REL=$(cat /etc/issue)
+	REL=$(cat /etc/issue.net)
 elif [ -f /etc/redhat-release ]; then
 	OS=redhat 
 	REL=$(cat /etc/redhat-release)
@@ -95,24 +89,6 @@ if [ -d /usr/local/virtualizor ]; then
 		echo "Exiting Installer"
 		exit;
 	fi
-
-fi
-
-#----------------------------------
-# Enabling Virtualizor repo
-#----------------------------------
-if [ "$OS" = redhat ] ; then
-
-	# Is yum there ?
-	if ! [ -f /usr/bin/yum ] ; then
-		echo "YUM wasnt found on the system. Please install YUM !"
-		echo "Exiting installer"
-		exit 1;
-	fi
-	
-	wget http://mirror.softaculous.com/virtualizor/virtualizor.repo -O /etc/yum.repos.d/virtualizor.repo >> $LOG 2>&1
-	
-	wget http://mirror.softaculous.com/virtualizor/extra/virtualizor-extra.repo -O /etc/yum.repos.d/virtualizor-extra.repo >> $LOG 2>&1
 
 fi
 
