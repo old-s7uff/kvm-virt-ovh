@@ -96,7 +96,7 @@ LOG=/root/virtualizor.log
           apt-get autoremove -y
           apt-get -f install -y
           apt-get install apt-utils build-essential -y
-          apt-get install mysql-server mysql-client -y
+          #apt-get install mysql-server mysql-client -y 
           apt-get install wget zip unzip curl sudo libssl-dev git -y
           apt-get install openssl libssl-dev libperl-dev libexpat-dev -y
           apt-get install dh-autoreconf -y
@@ -135,8 +135,8 @@ LOG=/root/virtualizor.log
           wget -N -O /usr/local/virtualizor/EMPS.tar.gz "http://files.softaculous.com/emps.php?arch=64"
           tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps
           rm -rf /usr/local/virtualizor/EMPS.tar.gz
-          cd /tmp; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
-          mv /tmp/install.php /usr/local/virtualizor/install.php
+          #cd /tmp; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
+          mv /root/install.php /usr/local/virtualizor/install.php
 # ==============================================
 # END DIRS.
 # ==============================================
@@ -144,6 +144,15 @@ LOG=/root/virtualizor.log
 # ==============================================
 # INSTALL.
 # ==============================================
+          rm -Rf /tmp
+          mkdir /tmp
+          chmod -R 7777 /tmp
+          #cd /usr/local/virtualizor/
+          #wget -O virt.zip -L "http://www.virtualizor.com/updates.php?install=true&version=latest"
+          #unzip virt.zip; rm -Rf virt.zip
+          #mysql -u root -p -e \ "CREATE DATABASE virtualizor;"
+          #mysql -u root -p virtualizor < virtualizor.sql
+          #cp /usr/local/virtualizor/_universal.php /usr/local/virtualizor/universal.php let install.php take care of it.
           /usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php email=daraw665@gmail.com kernel=kvm
           rm -rf /usr/local/virtualizor/install.php
           rm -rf /usr/local/virtualizor/upgrade.php
