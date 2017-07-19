@@ -5,13 +5,13 @@ someparts which virtualizor install anything which will touch network!
 
 How to use/install?
 
-1 . wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install-kvm
+1 . `wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install-kvm`
 
-2 . chmod +x install-kvm
+2 . `chmod +x install-kvm`
 
-3 . nano install-kvm *(edit this line wrote your email https://github.com/systemroot/kvm-virt-ovh/blob/master/install-kvm#L147)*
+3 . `nano install-kvm *(edit this line wrote your email https://github.com/systemroot/kvm-virt-ovh/blob/master/install-kvm#L147)*`
 
-4 . ./install-kvm
+4 . `./install-kvm`
 
 you will be asked to wrote mysql password. wrote whatever you want isn't problem. 
 
