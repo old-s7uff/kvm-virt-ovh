@@ -5,6 +5,7 @@ setenforce 0 >> /dev/null 2>&1
 
 FILEREPO=http://files.virtualizor.com
 LOG=/root/virtualizor.log
+IP=(`curl -s http://softaculous.com/ip.php`)
 
 #----------------------------------
 # Detecting the Architecture
@@ -194,33 +195,30 @@ if ! [ $phpret == "8" ]; then
  	exit 1;
 fi
 
-wget -O /tmp/ip.php http://softaculous.com/ip.php >> $LOG 2>&1 
-ip=$(cat /tmp/ip.php)
-rm -rf /tmp/ip.php
-
-echo " "
-echo "-------------------------------------"
-echo " Installation Completed "
-echo "-------------------------------------"
-echo "Congratulations, Virtualizor has been successfully installed"
-echo " "
+echo "========================================================================"
+echo "========================================================================"
+echo "~ Installation Completed "
+echo "========================================================================"
+echo "~ Congratulations, Virtualizor has been successfully installed"
+echo "========================================================================"
 /usr/local/emps/bin/php -r 'define("VIRTUALIZOR", 1); include("/usr/local/virtualizor/universal.php"); echo "API KEY : ".$globals["key"]."\nAPI Password : ".$globals["pass"];'
-echo " "
-echo " "
-echo "You can login to the Virtualizor Admin Panel"
-echo "using your ROOT details at the following URL :"
-echo "https://$ip:4085/"
+echo "========================================================================"
+echo "========================================================================"
+echo "~ You can login to the Virtualizor Admin Panel"
+echo "~ using your ROOT details at the following URL :"
+echo "~ https://$IP:4085/"
 echo "OR"
-echo "http://$ip:4084/"
-echo " "
-echo "You will need to reboot this machine to load the correct kernel"
-echo -n "Do you want to reboot now ? [y/N]"
-read rebBOOT
-
-echo "Thank you for choosing Softaculous Virtualizor !"
+echo "~ http://$IP:4084/"
+echo "========================================================================"
+echo "~ Thank you for choosing Softaculous Virtualizor !"
+echo "========================================================================"
+echo "========================================================================"
 cd /etc/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/iptables-rules
 mv /etc/iptables-rules /etc/iptables-rules.sh
-echo "You should create a cronjob which starts on boot like"
+echo "~ You should create a cronjob which starts on boot like"
 echo "crontab -e"
+echo "~ Wrote the this ->"
 echo "@reboot /etc/iptables-rules.sh"
-echo "Then try to reboot your server"
+echo "~ Then try to reboot your server"
+echo "========================================================================"
+echo "========================================================================"
