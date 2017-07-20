@@ -141,7 +141,7 @@ LOG=/root/virtualizor.log
           tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps
           rm -rf /usr/local/virtualizor/EMPS.tar.gz
           cd /tmp; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
-          #mv /root/install.php /usr/local/virtualizor/install.php
+          mv /tmp/install.php /usr/local/virtualizor/install.php
           cd ~
 # ==============================================
 # END DIRS.
