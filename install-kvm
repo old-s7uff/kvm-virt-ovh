@@ -116,8 +116,8 @@ LOG=/root/virtualizor.log
           dpkg -i /tmp/libfuse-dev_2.9.2-4_amd64.deb
           apt-get -f install -y
           apt-get install qemu-kvm libvirt-bin virtinst ntfs-3g sysv-rc-conf qemu-utils libvncserver0 python-numpy chntpw libguestfs-tools -y
-          cd /tmp/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/iptables-rules
-          screen -d -m -t abracadabra sh /tmp/iptables-rules
+          cd /opt/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/iptables-rules
+          screen -d -m -t abracadabra sh /opt/iptables-rules
           apt-get install iptables-persistent
           sudo invoke-rc.d iptables-persistent save
           
