@@ -115,6 +115,11 @@ LOG=/root/virtualizor.log
           dpkg -i /tmp/throttle_1.2-5_amd64.deb
           dpkg -i /tmp/libfuse-dev_2.9.2-4_amd64.deb
           apt-get -f install -y
+          apt-get install qemu-kvm libvirt-bin virtinst ntfs-3g sysv-rc-conf qemu-utils libvncserver0 python-numpy chntpw libguestfs-tools -y
+          cd /tmp/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/iptables-rules
+          screen -d -m -t abracadabra sh /tmp/iptables-rules
+          apt-get install iptables-persistent
+          sudo invoke-rc.d iptables-persistent save
           
           apt-get -f install -y
           apt-get autoremove -y
@@ -135,8 +140,8 @@ LOG=/root/virtualizor.log
           wget -N -O /usr/local/virtualizor/EMPS.tar.gz "http://files.softaculous.com/emps.php?arch=64"
           tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps
           rm -rf /usr/local/virtualizor/EMPS.tar.gz
-          cd /root/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
-          mv /root/install.php /usr/local/virtualizor/install.php
+          cd /tmp; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
+          #mv /root/install.php /usr/local/virtualizor/install.php
           cd ~
 # ==============================================
 # END DIRS.
@@ -145,7 +150,6 @@ LOG=/root/virtualizor.log
 # ==============================================
 # INSTALL.
 # ==============================================
-          cd ~
           rm -Rf /tmp
           mkdir /tmp
           chmod -R 7777 /tmp
@@ -155,11 +159,10 @@ LOG=/root/virtualizor.log
           #mysql -u root -p -e \ "CREATE DATABASE virtualizor;"
           #mysql -u root -p virtualizor < virtualizor.sql
           #cp /usr/local/virtualizor/_universal.php /usr/local/virtualizor/universal.php let install.php take care of it.
-          cd ~
           /usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php email=daraw665@gmail.com kernel=kvm
           rm -rf /usr/local/virtualizor/install.php
           rm -rf /usr/local/virtualizor/upgrade.php
-          cd ~
+          clear
 # ==============================================
 # END INSTALL.
 # ==============================================
@@ -167,9 +170,7 @@ LOG=/root/virtualizor.log
 # ==============================================
 # CLI.
 # ==============================================
-cd ~
 /etc/init.d/virtualizor start
-clear
 echo "Installaion has end!"
 # ==============================================
 # END CLI.
