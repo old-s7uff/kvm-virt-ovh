@@ -202,6 +202,7 @@ echo "========================================================================"
 echo "~ Congratulations, Virtualizor has been successfully installed"
 echo "========================================================================"
 /usr/local/emps/bin/php -r 'define("VIRTUALIZOR", 1); include("/usr/local/virtualizor/universal.php"); echo "API KEY : ".$globals["key"]."\nAPI Password : ".$globals["pass"];'
+echo " "
 echo "========================================================================"
 echo "========================================================================"
 echo "~ You can login to the Virtualizor Admin Panel"
@@ -213,7 +214,7 @@ echo "========================================================================"
 echo "~ Thank you for choosing Softaculous Virtualizor !"
 echo "========================================================================"
 echo "========================================================================"
-cd /etc/; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/iptables-rules
+cd /etc/; wget -s https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/iptables-rules
 mv /etc/iptables-rules /etc/iptables-rules.sh
 echo "~ You should create a cronjob which starts on boot like"
 echo "crontab -e"
