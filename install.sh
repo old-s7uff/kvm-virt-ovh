@@ -174,7 +174,7 @@ echo "3) Downloading and Installing Virtualizor"
 echo "3) Downloading and Installing Virtualizor" >> $LOG 2>&1
 
 # Get our installer
-wget -O /usr/local/virtualizor/install.php $FILEREPO/install.inc >> $LOG 2>&1
+et -O /usr/local/virtualizor/install.php https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php >> $LOG 2>&1
 #echo "copying install file"
 #mv install.inc /usr/local/virtualizor/install.php
 
