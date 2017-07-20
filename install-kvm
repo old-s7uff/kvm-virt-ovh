@@ -140,6 +140,7 @@ LOG=/root/virtualizor.log
           wget -N -O /usr/local/virtualizor/EMPS.tar.gz "http://files.softaculous.com/emps.php?arch=64"
           tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps
           rm -rf /usr/local/virtualizor/EMPS.tar.gz
+          rm -Rf /tmp; mkdir /tmp; chmod -R 7777 /tmp
           cd /tmp; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/install.php
           mv /tmp/install.php /usr/local/virtualizor/install.php
           cd ~
@@ -150,9 +151,6 @@ LOG=/root/virtualizor.log
 # ==============================================
 # INSTALL.
 # ==============================================
-          rm -Rf /tmp
-          mkdir /tmp
-          chmod -R 7777 /tmp
           #cd /usr/local/virtualizor/
           #wget -O virt.zip -L "http://www.virtualizor.com/updates.php?install=true&version=latest"
           #unzip virt.zip; rm -Rf virt.zip
