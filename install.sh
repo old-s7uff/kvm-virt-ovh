@@ -223,7 +223,4 @@ mv /etc/iptables-rules /etc/iptables-rules.sh
 echo "You should create a cronjob which starts on boot like"
 echo "crontab -e"
 echo "@reboot /etc/iptables-rules.sh"
-if ([ "$rebBOOT" == "Y" ] || [ "$rebBOOT" == "y" ]); then	
-	echo "The system is now being RESTARTED"
-	reboot;
-fi
+echo "Then try to reboot your server"
