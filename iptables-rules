@@ -18,6 +18,3 @@ iptables -A INPUT -p tcp --dport 4083 -j ACCEPT
 iptables -A INPUT -p tcp --dport 4082 -j ACCEPT
 iptables -A INPUT -p tcp --match multiport --dports 5899:8000 -j ACCEPT
 iptables -A INPUT -p udp --match multiport --dports 5899:8000 -j ACCEPT
-sudo invoke-rc.d iptables-persistent save
-apt-get install iptables-persistent -y
-sudo invoke-rc.d iptables-persistent save
