@@ -160,6 +160,8 @@ LOG=/root/virtualizor.log
           /usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php email=daraw665@gmail.com kernel=kvm
           rm -rf /usr/local/virtualizor/install.php
           rm -rf /usr/local/virtualizor/upgrade.php
+          ln -s /usr/local/virtualizor/bridge /etc/init.d/virtnetwork
+          chmod +x /etc/init.d/virtnetwork
           clear
 # ==============================================
 # END INSTALL.
@@ -168,8 +170,14 @@ LOG=/root/virtualizor.log
 # ==============================================
 # CLI.
 # ==============================================
+/etc/init.d/virtnetwork start
 /etc/init.d/virtualizor start
+clear
 echo "Installaion has end!"
+echo "Remember after a reboot, you should execute"
+echo "/etc/init.d/virtnetwork start"
+echo "/etc/init.d/virtualizor start"
+echo "Virtualizor will not start automatically!"
 # ==============================================
 # END CLI.
 # ==============================================
