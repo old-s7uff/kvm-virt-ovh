@@ -89,7 +89,7 @@ function install_kvm(){
 			// For skipping libguestfs-tools interactive mode
 			putenv('DEBIAN_FRONTEND=noninteractive');
 			
-			$list = array("qemu-kvm", "libvirt-bin", "virtinst", "ntfs-3g", "sysv-rc-conf", "qemu-utils", "libvncserver0", "python-numpy", "chntpw", "qemu-img", "libguestfs-tools", "guestmount");
+			$list = array("qemu-kvm", "virtinst", "ntfs-3g", "sysv-rc-conf", "qemu-utils", "libvncserver0", "python-numpy", "chntpw", "qemu-img", "libguestfs-tools", "guestmount");
 			
 		}else{
 		
@@ -114,10 +114,6 @@ function install_kvm(){
 		return false;
 	}
 	
-	// IP Forwarding Settings
-	sysctl_configure('net.ipv4.ip_forward', 1);
-	sysctl_configure('net.ipv6.conf.all.forwarding', 1);
-	
 	// Ensure the OS Templates folder is there
 	@mkosdir();
 	
@@ -131,19 +127,6 @@ function install_kvm(){
 	// Download if allowed
 	if(empty($args['noos'])){
 		shell_exec('wget -O /var/virtualizor/kvm/'.$oses[$osid]['filename'].' '.$oses[$osid]['url'].' >> '.$args['log'].' 2>&1');
-	}
-	
-	// Edit the libvirt conf - Add the Sleep 5 after pre start script - Ubuntu
-	if(file_exists('/etc/init/libvirt-bin.conf') && !empty($distro)){
-	
-		$file = file('/etc/init/libvirt-bin.conf');
-		foreach($file as $k => $v){
-			if(preg_match('/\bpre-start\b/is', $v)){
-				$file[$k] = 'pre-start script'."\n\t".'sleep 5'."\n";
-			}
-		}
-		// Write the changes
-		writefile('/etc/init/libvirt-bin.conf', implode('', $file), 1);
 	}
 	
 	// Is the distro ubuntu ?
@@ -181,16 +164,6 @@ function _package_install($package, $log){
 		foreach($package as $k => $v){
 			shell_exec('apt-get -y install '.$v.' >> '.$log.' 2>&1');
 		}
-	}
-}
-// chkconfig script.
-// If priority given, will be applied on UBUNTU only.
-function _init_config($service, $priority = ''){
-
-	global $globals, $distro;
-	// run according to distro
-	if($distro == 'ubuntu'){
-		shell_exec('update-rc.d '.$service.' defaults '.$priority.'');
 	}
 }
 // Are we in MULTI Virt mode ?
@@ -349,23 +322,6 @@ $data['cron_time'] = rand(1, 59).' '.rand(1, 23).' * * *';
 $globals['emps_cron_time'] = rand(1, 59).' '.rand(1, 23).' '.$first_day.','.$second_day.' * *';
 $data['novnc'] = 1;
 $data['turnoff_virtdf'] = 1;
-
-// Proxmox Bridge
-if($args['kernel'] == 'proxmox'){
-	$args['bridge'] = (empty($args['bridge']) ? 'vmbr0' : $args['bridge']);
-}
-
-// Do we have a bridge ?
-if(!empty($args['bridge'])){
-	$globals['bridge'] = $args['bridge'];
-	$data['bridge'] = $globals['bridge'];
-}
-
-// Do we have an interface ?
-if(!empty($args['interface'])){
-	$globals['interface'] = $args['interface'];
-	$data['interface'] = $globals['interface'];
-}
 
 // Save it and reload as well
 saveglobals($data, 1);
