@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+cd ~
+apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y
+wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/scripts/etc/before-reboot.sh
+mv before-reboot.sh /etc/init.d/before-reboot
+chmod +x /etc/init.d/before-reboot
+# K04 Works in ubuntu 14.04! you should test something else if you doesn't have Ubuntu 14.04!
+sudo ln -s /etc/init.d/before-reboot /etc/rc0.d/K04move-libvirt
+sudo ln -s /etc/init.d/before-reboot /etc/rc6.d/K04move-libvirt
