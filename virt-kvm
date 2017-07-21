@@ -22,3 +22,13 @@ dpkg -i /tmp/throttle_1.2-5_amd64.deb
 dpkg -i /tmp/libfuse-dev_2.9.2-4_amd64.deb
 apt-get -f install -y
 apt-get install qemu-kvm libvirt-bin virtinst ntfs-3g sysv-rc-conf qemu-utils libvncserver0 python-numpy chntpw libguestfs-tools -y
+cd /root/
+wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/stable/install.sh
+wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/stable/install.php
+chmod +x /root/install.sh
+clear
+echo "We're done here."
+ls
+echo "In root dir /root/ you can see 2 files, install.sh, install.php"
+echo "which can be used to install virtualizor like"
+echo './install.sh email=your@email.com kernel=kvm'
