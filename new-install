@@ -9,3 +9,14 @@ chmod +x /etc/init.d/before-reboot
 # K04 Works in ubuntu 14.04! you should test something else if you doesn't have Ubuntu 14.04!
 sudo ln -s /etc/init.d/before-reboot /etc/rc0.d/K04move-libvirt
 sudo ln -s /etc/init.d/before-reboot /etc/rc6.d/K04move-libvirt
+
+# Get Scripts.
+mkdir /etc/scripts; cd /etc/scripts; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/scripts/etc/after-reboot.sh
+cd /etc/scripts; wget https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/scripts/etc/iptable-rules.sh
+chmod +x /etc/scripts/after-reboot.sh
+chmod +x /etc/scripts/iptable-rules.sh
+
+# Execute after server boot. Make sure you doesn't have anything important on /etc/rc.local !
+echo '#!/bin/sh -e' > /etc/rc.local
+echo '/etc/scripts/after-reboot.sh' >> /etc/rc.local
+echo 'exit 0' >> /etc/rc.local
