@@ -32,3 +32,4 @@ ls
 echo "In root dir /root/ you can see 2 files, install.sh, install.php"
 echo "which can be used to install virtualizor like"
 echo './install.sh email=your@email.com kernel=kvm'
+rm -Rf /root/virt-kvm/
