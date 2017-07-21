@@ -14,6 +14,7 @@ service libvirt-bin stop
 service libvirt-bin start
 service isc-dhcp-server start
 service virtualizor start
+service virtnetwork start
 
 #Flush libvirt firewall rules, and apply yours!
 sh /etc/scripts/iptable-rules.sh
