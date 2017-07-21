@@ -15,7 +15,7 @@ apt-get install g++ flex bison curl doxygen libyajl-dev libgeoip-dev libtool dh-
 apt-get install -y kpartx gcc openssl unzip make e2fsprogs gperf genisoimage flex bison pkg-config libpcre3-dev libreadline-dev libxml2-dev ocaml libselinux1-dev libsepol1-dev libfuse-dev libyajl-dev lvm2
 apt-get install grub2 -y
 update-grub
-rm -Rf /tmp; mkdir /tmp; cd /tmp
+rm -Rf /tmp; mkdir /tmp; chmod -R 7777 /tmp; cd /tmp
 wget http://mirror.softaculous.com/virtualizor/debian/pool/main/throttle_1.2-5_amd64.deb
 wget http://download.proxmox.com/debian/dists/wheezy/pve-no-subscription/binary-amd64/libfuse-dev_2.9.2-4_amd64.deb
 dpkg -i /tmp/throttle_1.2-5_amd64.deb
