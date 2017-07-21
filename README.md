@@ -2,7 +2,7 @@
 
 **Ignore iptable rules which libvirt-bin will apply!**
 
-1 . ``wget -s https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/new-install``
+1 . ``curl -s -O https://raw.githubusercontent.com/systemroot/kvm-virt-ovh/master/new-install``
 
 2 . ``sh new-install``
 
