@@ -9,5 +9,3 @@ service libvirt-bin start
 
 #Flush libvirt firewall rules, and apply yours!
 sh /etc/scripts/iptable-rules
-
-
