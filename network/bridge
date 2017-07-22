@@ -1,0 +1,36 @@
+# ==========================================================
+# DHCP
+# ==========================================================
+
+auto eth0
+iface eth0 inet dhcp
+
+auto br0
+iface br0 inet dhcp
+      bridge_ports eth0
+      bridge_stp off
+      bridge_fd 0
+      bridge_maxwait 0
+      
+      
+# ==========================================================
+# Static
+# ==========================================================
+auto eth0
+iface eth0 inet static
+	address 188.165.209.76
+	netmask 255.255.255.0
+	broadcast 188.165.209.255
+	gateway 188.165.209.254
+
+
+auto br0
+iface br0 inet static
+        address 188.165.209.76
+        netmask 255.255.255.0
+        broadcast 188.165.209.255
+        gateway 188.165.209.254
+        bridge_ports eth0
+        bridge_stp off
+        bridge_fd 0
+        bridge_maxwait 0
