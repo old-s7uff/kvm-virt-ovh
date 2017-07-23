@@ -13,6 +13,7 @@ if you wrote ``iptable -L``
 
 but if you now execute ``reboot``
 everything will be the same if you execute ``ifconfig``
+
 but not everything will be the same if you execute ``iptables -L``
 
 Add your custom iptable rules into ``/etc/scripts/iptable-rules.sh``
