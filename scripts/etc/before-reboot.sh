@@ -8,3 +8,5 @@ mv /etc/init.d/zzvirtservice /opt/
 service virtnetwork stop
 service isc-dhcp-server stop
 dhclient
+iptables -F
+iptables -P INPUT ACCEPT
